@@ -1,0 +1,29 @@
+{
+  "name": "cmpe131-inv-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-guy-in-the-chair/cmpe131-group11-inventory-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-guy-in-the-chair/cmpe131-group11-inventory-service/issues"
+  },
+  "homepage": "https://github.com/the-guy-in-the-chair/cmpe131-group11-inventory-service#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
