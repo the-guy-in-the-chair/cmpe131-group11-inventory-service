@@ -40,7 +40,35 @@ app.get("/api/all_items", (req, res, next) => {
 
 // [POST] add a new product to the inventory 
 app.post("/api/inventory", (req, res, next) => { 
-    
+    const { product_id, stock_level } = req.body;
+
+    if (product_id === undefined || stock_level === undefined) {
+        return res.status(400).json({ error: "product_id and stock_level are required" });
+    }
+
+    const last_updated = Date(); 
+
+    const sql = `
+        INSERT INTO inventory (product_id, stock_level, last_updated)
+        VALUES (?, ?, ?)
+    `;
+    const params = [product_id, stock_level, last_updated];
+
+    db.run(sql, params, function(err) {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+
+        res.status(201).json({
+            message: "success",
+            data: {
+                id: this.lastID,
+                product_id,
+                stock_level,
+                last_updated
+            }
+        });
+    });    
 });
 
 // [GET] get the current stock for a product
