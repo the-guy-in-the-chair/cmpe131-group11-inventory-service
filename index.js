@@ -20,24 +20,6 @@ app.get("/", (req, res, next) => {
  
 // --- API OPERATIONS --- 
 
-// REMOVE THIS BEFORE DELIVERING
-// INTENDED FOR TESTING PURPOSES ONLY
-// GET all inventory items (Read) 
-app.get("/api/all_items", (req, res, next) => { 
-    const sql = "select * from inventory"; 
-    const params = []; 
-    db.all(sql, params, (err, rows) => { 
-        if (err) { 
-          res.status(400).json({error:err.message}); 
-          return; 
-        } 
-        res.json({ 
-            message:"success", 
-            data:rows 
-        }); 
-      }); 
-});
-
 // [POST] add a new product to the inventory 
 app.post("/api/inventory", (req, res, next) => { 
     const { product_id, stock_level } = req.body;
