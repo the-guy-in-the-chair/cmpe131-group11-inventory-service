@@ -20,11 +20,11 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
             } else { 
                 // Table just created, creating some rows 
                 const insert = 'INSERT INTO inventory (product_id, stock_level, last_updated) VALUES (?,?,?)'; 
-                db.run(insert, [0,4,Date()]);
-                db.run(insert, [1,11,Date()]);
-                db.run(insert, [2,108,Date()]);
-                db.run(insert, [3,65,Date()]);
-                db.run(insert, [4,36,Date()]);
+                db.run(insert, [1,4,Date()]);
+                db.run(insert, [2,11,Date()]);
+                db.run(insert, [3,108,Date()]);
+                db.run(insert, [4,65,Date()]);
+                db.run(insert, [5,36,Date()]);
             } 
         });   
     } 

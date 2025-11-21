@@ -110,7 +110,20 @@ app.post("/api/inventory/decrement", async (req, res, next) => {
                     reject(err);
                 } else if (this.changes === 0) {
                     // Reject if the query was successful but ZERO rows were modified.
-                    // This indicates an invalid product ID was used.
+                    reject(new Error(`Product ID ${params[2]} not found or inventory unchanged.`));
+                    
+                } else {
+                    // Resolve with the number of changes (this.changes is accessible here)
+                    resolve(this.changes);
+                }
+            });
+            db.run(`UPDATE inventory SET last_updated = ? WHERE product_id = ?`, 
+                [Date(),params[2]], function(err) {
+                if (err) {
+                    // Reject the promise on DB error
+                    reject(err);
+                } else if (this.changes === 0) {
+                    // Reject if the query was successful but ZERO rows were modified.
                     reject(new Error(`Product ID ${params[2]} not found or inventory unchanged.`));
                     
                 } else {
@@ -190,7 +203,20 @@ app.post("/api/inventory/increment", async (req, res, next) => {
                     reject(err);
                 } else if (this.changes === 0) {
                     // Reject if the query was successful but ZERO rows were modified.
-                    // This indicates an invalid product ID was used.
+                    reject(new Error(`Product ID ${params[2]} not found or inventory unchanged.`));
+                    
+                } else {
+                    // Resolve with the number of changes (this.changes is accessible here)
+                    resolve(this.changes);
+                }
+            });
+            db.run(`UPDATE inventory SET last_updated = ? WHERE product_id = ?`, 
+                [Date(),params[2]], function(err) {
+                if (err) {
+                    // Reject the promise on DB error
+                    reject(err);
+                } else if (this.changes === 0) {
+                    // Reject if the query was successful but ZERO rows were modified.
                     reject(new Error(`Product ID ${params[2]} not found or inventory unchanged.`));
                     
                 } else {
