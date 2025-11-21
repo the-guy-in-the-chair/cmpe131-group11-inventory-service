@@ -44,8 +44,23 @@ app.post("/api/inventory", (req, res, next) => {
 });
 
 // [GET] get the current stock for a product
-app.get("/api/inventory/:id", (req, res, next) => { 
-    
+app.get("/api/inventory/:product_id", (req, res, next) => { 
+    const sql = "select * from inventory where product_id = ?";
+    db.get(sql, [req.params.product_id], (err, row) => {
+        if (err) {
+            res.status(400).json({error:err.message});
+            return;
+        }
+        // Error if no product found
+        if (!row) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+        // Return the product info
+        res.json({
+            message:"success",
+            data:row
+        });
+    });
 });
 
 // [POST] takes a list of {product_id,quantity} to decrement from stock
